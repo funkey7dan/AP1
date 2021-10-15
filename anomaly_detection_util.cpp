@@ -58,7 +58,6 @@ float cov(float *x, float *y, int size) {
  * @param size of x and y.
  * @return Pearson correlation coefficient.
  */
-// TODO Implement pearson function
 float pearson(float *x, float *y, int size) {
     //calculate the covariance
     float cov_xy = cov(x, y, size);
