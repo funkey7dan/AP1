@@ -7,19 +7,19 @@
 #include "anomaly_detection_util.h"
 
 /**
- * Calculate the mean of a given range
+ * Calculate the avg of a given range
  * @param x - array of floats
  * @param size - size of the sample
- * @return the mean of the range
+ * @return the avg of the range
  */
-float mean(float *x, int size) {
+float avg(float *x, int size) {
     float sum = 0; // sum of the elements in the X array
 
     // sums all the elements in the array
     for (int i = 0; i < size; ++i) {
         sum += x[i];
     }
-    // return the mean
+    // return the avg
     return sum / size;
 }
 
@@ -31,7 +31,7 @@ float mean(float *x, int size) {
  */
 float var(float *x, int size) {
 
-    float mu = mean(x, size);
+    float mu = avg(x, size);
     float sum = 0;
     for (int i = 0; i < size; ++i) {
         sum += pow((x[i] - mu), 2);
@@ -52,9 +52,9 @@ float var(float *x, int size) {
  * @return covariance between x and y.
  */
 float cov(float *x, float *y, int size) {
-    //xm and ym are the means of two given arrays.
-    float xm = mean(x, size);
-    float ym = mean(y, size);
+    //xm and ym are the avgs of two given arrays.
+    float xm = avg(x, size);
+    float ym = avg(y, size);
     float sum = 0;
     for (int i = 0; i < size; ++i) {
         sum += (x[i] - xm) * (y[i] - ym);
