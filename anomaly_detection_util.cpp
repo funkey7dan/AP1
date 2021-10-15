@@ -36,13 +36,14 @@ float var(float *x, int size) {
 }
 //
 //
-///**
-// * returns the covariance of X and Y
-// * @param x
-// * @param y
-// * @param size
-// * @return
-// */
+/**
+ * returns the covariance of X and Y
+ * @param x
+ * @param y
+ * @param size
+ * @return
+ * @todo Implement Cov function
+ */
 //float cov(float *x, float *y, int size) {
 //
 //}
