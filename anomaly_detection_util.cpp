@@ -86,16 +86,16 @@ float pearson(float *x, float *y, int size) {
  * @return a line that represents the linear regression
  */
 Line linear_reg(Point **points, int size) {
-    float x_array[size], y_array[size], mean_x, mean_y, a, b;
+    float x_array[size], y_array[size], avg_x, avg_y, a, b;
     // create arrays of the x and y values
     for (int i = 0; i < size; i++) {
         x_array[i] = points[i]->x;
         y_array[i] = points[i]->y;
     }
     a = (cov(x_array, y_array, size)) / var(x_array, size);
-    mean_x = mean(x_array, size);
-    mean_y = mean(y_array, size);
-    b = mean_y - a * mean_x;
+    avg_x = avg(x_array, size);
+    avg_y = avg(y_array, size);
+    b = avg_y - a * avg_x;
     return Line(a, b);
 }
 
