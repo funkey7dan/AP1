@@ -23,6 +23,7 @@ float var(float *x, int size) {
 //
 //
 //// returns the covariance of X and Y
+// @todo Implement Cov function
 //float cov(float *x, float *y, int size) {
 //
 //}
