@@ -50,7 +50,7 @@ float cov(float *x, float *y, int size) {
     }
     return sum / size;
 }
-//
+
 /**
  * returns the Pearson correlation coefficient of X and Y
  * @param x array of floats.
@@ -66,8 +66,7 @@ float pearson(float *x, float *y, int size) {
     float sig_y = pow(var(y, size), 0.5);
     return cov_xy / (sig_x * sig_y);
 }
-////
-//
+
 /**
  * performs a linear regression and returns the line equation
  * @param points
