@@ -25,12 +25,18 @@ float mean(float *x, int size) {
  * @return variance
  */
 float var(float *x, int size) {
+
     float mu = mean(x, size);
     float sum = 0;
     for (int i = 0; i < size; ++i) {
         sum += pow((x[i] - mu), 2);
     }
-    return sum / size;
+    try{
+        return sum / size;
+    }
+    catch(const std::exception& e){
+        std::cout<< e.what()<<std::endl;
+    }
 }
 
 /**
@@ -59,6 +65,7 @@ float cov(float *x, float *y, int size) {
  * @return Pearson correlation coefficient.
  */
 float pearson(float *x, float *y, int size) {
+
     //calculate the covariance
     float cov_xy = cov(x, y, size);
     //define the standard deviation of x and y
