@@ -42,9 +42,9 @@ float var(float *x, int size) {
  * @return
  * @todo Implement Cov function
  */
-//float cov(float *x, float *y, int size) {
+float cov(float *x, float *y, int size) {
 //
-//}
+}
 //
 /**
  * returns the Pearson correlation coefficient of X and Y
@@ -54,9 +54,9 @@ float var(float *x, int size) {
  * @return
  * @todo Implement pearson function
  */
-//float pearson(float *x, float *y, int size) {
+float pearson(float *x, float *y, int size) {
 //
-//}
+}
 ////
 //
 /**
@@ -66,9 +66,10 @@ float var(float *x, int size) {
  * @return
  * @todo Implement linear_reg function
  */
-//Line linear_reg(Point **points, int size) {
-//}
-//
+Line linear_reg(Point **points, int size) {
+    //
+}
+
 /**
  * returns the deviation between point p and the line equation of the points
  * @param p
@@ -77,9 +78,9 @@ float var(float *x, int size) {
  * @return
  * @todo Implement dev function
  */
-//float dev(Point p, Point **points, int size) {
+float dev(Point p, Point **points, int size) {
 //
-//}
+}
 //
 //
 /**
@@ -89,7 +90,7 @@ float var(float *x, int size) {
  * @return
  * @todo Implement dev function
  */
-//float dev(Point p, Line l) {
+float dev(Point p, Line l) {
 //
-//}
+}
 
