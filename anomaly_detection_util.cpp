@@ -31,11 +31,11 @@ float var(float *x, int size) {
     for (int i = 0; i < size; ++i) {
         sum += pow((x[i] - mu), 2);
     }
-    try{
+    try {
         return sum / size;
     }
-    catch(const std::exception& e){
-        std::cout<< e.what()<<std::endl;
+    catch (const std::exception &e) {
+        std::cout << e.what() << std::endl;
     }
 }
 
@@ -81,11 +81,21 @@ float pearson(float *x, float *y, int size) {
  * @param size
  * @return
  */
- //TODO Implement linear_reg function
+//TODO Implement linear_reg function
 Line linear_reg(Point **points, int size) {
 
 }
-//
+
+/**
+ * returns the deviation between point p and the line
+ * @param p
+ * @param l
+ * @return deviation between point Y and the expected location
+ */
+float dev(Point p, Line l) {
+    float expected_y = l.f(p.x);
+    return abs(expected_y - p.y);
+}
 /**
  * returns the deviation between point p and the line equation of the points
  * @param p
@@ -93,20 +103,9 @@ Line linear_reg(Point **points, int size) {
  * @param size
  * @return
  */
-//TODO Implement dev function
 float dev(Point p, Point **points, int size) {
-//
+    return dev(p, linear_reg(points, size));
 }
-//
-//
-/**
- * returns the deviation between point p and the line
- * @param p
- * @param l
- * @return
- */
-// TODO Implement dev function
-float dev(Point p, Line l) {
-//
-}
+
+
 
