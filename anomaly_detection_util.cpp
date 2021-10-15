@@ -41,7 +41,6 @@ float var(float *x, int size) {
  * @return
  *
  */
-//@todo Implement Cov function
 float cov(float *x, float *y, int size) {
 
 }
@@ -53,7 +52,7 @@ float cov(float *x, float *y, int size) {
  * @param size
  * @return
  */
-// @todo Implement pearson function
+// TODO Implement pearson function
 float pearson(float *x, float *y, int size) {
 
 }
@@ -65,8 +64,9 @@ float pearson(float *x, float *y, int size) {
  * @param size
  * @return
  */
- //@todo Implement linear_reg function
+ //TODO Implement linear_reg function
 Line linear_reg(Point **points, int size) {
+
 }
 //
 /**
@@ -76,7 +76,7 @@ Line linear_reg(Point **points, int size) {
  * @param size
  * @return
  */
-//@todo Implement dev function
+//TODO Implement dev function
 float dev(Point p, Point **points, int size) {
 //
 }
@@ -88,7 +88,7 @@ float dev(Point p, Point **points, int size) {
  * @param l
  * @return
  */
-// @todo Implement dev function
+// TODO Implement dev function
 float dev(Point p, Line l) {
 //
 }
