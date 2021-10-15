@@ -1,4 +1,9 @@
-#include <cmath>
+/*
+ * animaly_detection_util.cpp
+ *
+ * Author: ***REMOVED*** Daniel Bronfman
+ */
+#include <math.h>
 #include "anomaly_detection_util.h"
 
 /**
