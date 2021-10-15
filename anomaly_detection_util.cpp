@@ -1,5 +1,3 @@
-
-
 #include <cmath>
 #include "anomaly_detection_util.h"
 
@@ -48,45 +46,49 @@ float var(float *x, int size) {
 //
 //}
 //
-///**
-// * returns the Pearson correlation coefficient of X and Y
-// * @param x
-// * @param y
-// * @param size
-// * @return
-// */
+/**
+ * returns the Pearson correlation coefficient of X and Y
+ * @param x
+ * @param y
+ * @param size
+ * @return
+ * @todo Implement pearson function
+ */
 //float pearson(float *x, float *y, int size) {
 //
 //}
 ////
 //
-///**
-// * performs a linear regression and returns the line equation
-// * @param points
-// * @param size
-// * @return
-// */
+/**
+ * performs a linear regression and returns the line equation
+ * @param points
+ * @param size
+ * @return
+ * @todo Implement linear_reg function
+ */
 //Line linear_reg(Point **points, int size) {
 //}
 //
-///**
-// * returns the deviation between point p and the line equation of the points
-// * @param p
-// * @param points
-// * @param size
-// * @return
-// */
+/**
+ * returns the deviation between point p and the line equation of the points
+ * @param p
+ * @param points
+ * @param size
+ * @return
+ * @todo Implement dev function
+ */
 //float dev(Point p, Point **points, int size) {
 //
 //}
 //
 //
-///**
-// * returns the deviation between point p and the line
-// * @param p
-// * @param l
-// * @return
-// */
+/**
+ * returns the deviation between point p and the line
+ * @param p
+ * @param l
+ * @return
+ * @todo Implement dev function
+ */
 //float dev(Point p, Line l) {
 //
 //}
