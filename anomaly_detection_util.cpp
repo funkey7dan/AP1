@@ -53,14 +53,19 @@ float cov(float *x, float *y, int size) {
 //
 /**
  * returns the Pearson correlation coefficient of X and Y
- * @param x
- * @param y
- * @param size
- * @return
+ * @param x array of floats.
+ * @param y array of floats.
+ * @param size of x and y.
+ * @return Pearson correlation coefficient.
  */
 // TODO Implement pearson function
 float pearson(float *x, float *y, int size) {
-
+    //calculate the covariance
+    float cov_xy = cov(x, y, size);
+    //define the standard deviation of x and y
+    float sig_x = pow(var(x, size), 0.5);
+    float sig_y = pow(var(y, size), 0.5);
+    return cov_xy / (sig_x * sig_y);
 }
 ////
 //
