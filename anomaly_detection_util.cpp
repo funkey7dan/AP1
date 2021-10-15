@@ -22,10 +22,17 @@ float var(float *x, int size) {
 }
 //
 //
-//// returns the covariance of X and Y
-//float cov(float *x, float *y, int size) {
-//
-//}
+// returns the covariance of X and Y
+float cov(float *x, float *y, int size) {
+    //xm and ym are the means of two given arrays.
+    float xm = mean(x, size);
+    float ym = mean(y, size);
+    float sum = 0;
+    for (int i = 0; i < size; ++i) {
+        sum += (x[i] - xm) * (y[i] - ym);
+    }
+    return sum / size;
+}
 //
 //// returns the Pearson correlation coefficient of X and Y
 //float pearson(float *x, float *y, int size) {
