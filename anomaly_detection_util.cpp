@@ -61,7 +61,7 @@ float cov(float *x, float *y, int size) {
     }
     return sum / size;
 }
-//
+
 /**
  * returns the Pearson correlation coefficient of X and Y
  * @param x array of floats.
@@ -78,17 +78,25 @@ float pearson(float *x, float *y, int size) {
     float sig_y = pow(var(y, size), 0.5);
     return cov_xy / (sig_x * sig_y);
 }
-////
-//
+
 /**
  * performs a linear regression and returns the line equation
  * @param points
  * @param size
- * @return
+ * @return a line that represents the linear regression
  */
-//TODO Implement linear_reg function
 Line linear_reg(Point **points, int size) {
-
+    float x_array[size], y_array[size], mean_x, mean_y, a, b;
+    // create arrays of the x and y values
+    for (int i = 0; i < size; i++) {
+        x_array[i] = points[i]->x;
+        y_array[i] = points[i]->y;
+    }
+    a = (cov(x_array, y_array, size)) / var(x_array, size);
+    mean_x = mean(x_array, size);
+    mean_y = mean(y_array, size);
+    b = mean_y - a * mean_x;
+    return Line(a, b);
 }
 
 /**
@@ -101,6 +109,7 @@ float dev(Point p, Line l) {
     float expected_y = l.f(p.x);
     return abs(expected_y - p.y);
 }
+
 /**
  * returns the deviation between point p and the line equation of the points
  * @param p
