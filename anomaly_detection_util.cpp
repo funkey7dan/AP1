@@ -1,7 +1,7 @@
 /*
  * animaly_detection_util.cpp
  *
- * Author: ***REMOVED*** Daniel Bronfman
+ * Author: 316163922 Tomer Pardilov
  */
 #include <cmath>
 #include <math.h>
