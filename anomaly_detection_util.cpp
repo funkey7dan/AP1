@@ -4,6 +4,7 @@
  * Author: ***REMOVED*** Daniel Bronfman
  */
 #include <cmath>
+#include <cstddef>
 #include <math.h>
 #include "anomaly_detection_util.h"
 
@@ -31,9 +32,12 @@ float avg(float *x, int size) {
  * @return variance
  */
 float var(float *x, int size) {
-//    if (size <= 0) {
-//        throw std::exception();
-//    }
+    if (size <= 0) {
+        throw "Division by zero!";
+    }
+    if (x == NULL) {
+        throw "Array is a null ponter!";
+    }
     float mu = avg(x, size);
     float sum = 0;
     for (int i = 0; i < size; ++i) {
@@ -51,6 +55,12 @@ float var(float *x, int size) {
  */
 float cov(float *x, float *y, int size) {
     //xm and ym are the avgs of two given arrays.
+    if (size <= 0) {
+        throw "Division by zero!";
+    }
+    if (x == NULL || y==NULL) {
+        throw "Array is a null ponter!";
+    }
     float xm = avg(x, size);
     float ym = avg(y, size);
     float sum = 0;
@@ -68,7 +78,12 @@ float cov(float *x, float *y, int size) {
  * @return Pearson correlation coefficient.
  */
 float pearson(float *x, float *y, int size) {
-
+    if (size <= 0) {
+        throw "Division by zero!";
+    }
+    if (x == NULL || y==NULL) {
+        throw "Array is a null ponter!";
+    }
     //calculate the covariance
     float cov_xy = cov(x, y, size);
     //define the standard deviation of x and y
@@ -84,6 +99,12 @@ float pearson(float *x, float *y, int size) {
  * @return a line that represents the linear regression
  */
 Line linear_reg(Point **points, int size) {
+    if (size <= 0) {
+        throw "Division by zero!";
+    }
+    if (points == NULL) {
+        throw "Array is a null ponter!";
+    }
     float x_array[size], y_array[size], avg_x, avg_y, a, b;
     // create arrays of the x and y values
     for (int i = 0; i < size; i++) {
@@ -116,6 +137,12 @@ float dev(Point p, Line l) {
  * @return
  */
 float dev(Point p, Point **points, int size) {
+    if (points == NULL) {
+        throw "Array is a null ponter!";
+    }
+    if (size <= 0) {
+        throw "Division by zero!";
+    }
     return dev(p, linear_reg(points, size));
 }
 
