@@ -31,7 +31,6 @@ float avg(float *x, int size) {
  * @return variance
  */
 float var(float *x, int size) {
-
     //TODO: handle edge case - division by zero.
 //    if (size <= 0) {
 //        throw std::exception();
