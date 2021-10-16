@@ -1,7 +1,7 @@
 /*
  * animaly_detection_util.cpp
  *
- * Author: ***REMOVED*** Daniel Bronfman
+ * Author: Insert name and ID
  */
 #include <cmath>
 #include <cstddef>
