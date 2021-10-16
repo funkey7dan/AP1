@@ -31,7 +31,6 @@ float avg(float *x, int size) {
  * @return variance
  */
 float var(float *x, int size) {
-    //TODO: handle edge case - division by zero.
 //    if (size <= 0) {
 //        throw std::exception();
 //    }
@@ -51,7 +50,6 @@ float var(float *x, int size) {
  * @return covariance between x and y.
  */
 float cov(float *x, float *y, int size) {
-    //TODO: handle edge case - division by zero.
     //xm and ym are the avgs of two given arrays.
     float xm = avg(x, size);
     float ym = avg(y, size);
@@ -70,7 +68,6 @@ float cov(float *x, float *y, int size) {
  * @return Pearson correlation coefficient.
  */
 float pearson(float *x, float *y, int size) {
-    //TODO: handle edge case - division by zero.
     //calculate the covariance
     float cov_xy = cov(x, y, size);
     //define the standard deviation of x and y
