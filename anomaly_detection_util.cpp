@@ -15,15 +15,15 @@
  */
 float avg(float *x, int size) {
     float sum = 0; // sum of the elements in the X array
-    if (size <= 0) {
-        throw std::runtime_error("Division by zero!\n");
-    }
+//    if (size <= 0) {
+//        throw std::runtime_error("Division by zero!\n");
+//    }
     // sums all the elements in the array
     for (int i = 0; i < size; ++i) {
         sum += x[i];
     }
     // return the avg
-    return sum / (float)size;
+    return sum / size;
 }
 
 /**
@@ -33,18 +33,18 @@ float avg(float *x, int size) {
  * @return variance
  */
 float var(float *x, int size) {
-    if (size <= 0) {
-        throw std::runtime_error("Division by zero!\n");
-    }
+//    if (size <= 0) {
+//        throw std::runtime_error("Division by zero!\n");
+//    }
 //    if (x == NULL) {
 //        throw "Array is a null ponter!";
 //    }
     float mu = avg(x, size);
     float sum = 0;
     for (int i = 0; i < size; ++i){
-        sum += (x[i] - mu) * (x[i] - mu);
+        sum += x[i] * x[i];
     }
-    return sum / (float)size;
+    return sum / size - mu * mu;
 }
 
 /**
@@ -56,9 +56,9 @@ float var(float *x, int size) {
  */
 float cov(float *x, float *y, int size) {
     //xm and ym are the avgs of two given arrays.
-    if (size <= 0) {
-        throw std::runtime_error("Division by zero!\n");
-    }
+//    if (size <= 0) {
+//        throw std::runtime_error("Division by zero!\n");
+//    }
 //    if (x == NULL || y==NULL) {
 //        throw "Array is a null ponter!";
 //    }
@@ -66,9 +66,9 @@ float cov(float *x, float *y, int size) {
     float ym = avg(y, size);
     float sum = 0;
     for (int i = 0; i < size; ++i) {
-        sum += (x[i] - xm) * (y[i] - ym);
+        sum += x[i] * y[i];
     }
-    return sum / (float)size;
+    return sum / size - xm * ym;
 }
 
 /**
@@ -79,9 +79,9 @@ float cov(float *x, float *y, int size) {
  * @return Pearson correlation coefficient.
  */
 float pearson(float *x, float *y, int size) {
-    if (size <= 0) {
-        throw std::runtime_error("Division by zero!\n");
-    }
+//    if (size <= 0) {
+//        throw std::runtime_error("Division by zero!\n");
+//    }
 //    if (x == NULL || y==NULL) {
 //        throw "Array is a null ponter!";
 //    }
@@ -100,9 +100,9 @@ float pearson(float *x, float *y, int size) {
  * @return a line that represents the linear regression
  */
 Line linear_reg(Point **points, int size) {
-    if (size <= 0) {
-        throw std::runtime_error("Division by zero!\n");
-    }
+//    if (size <= 0) {
+//        throw std::runtime_error("Division by zero!\n");
+//    }
 //    if (points == NULL) {
 //        throw "Array is a null ponter!";
 //    }
@@ -116,8 +116,8 @@ Line linear_reg(Point **points, int size) {
     avg_x = avg(x_array, size);
     avg_y = avg(y_array, size);
     b = avg_y - a * avg_x;
-    Line l1 = Line(a, b);
-    return l1;
+    Line l = Line(a, b);
+    return l;
 }
 
 /**
@@ -129,6 +129,7 @@ Line linear_reg(Point **points, int size) {
 float dev(Point p, Line l) {
     float expected_y = l.f(p.x);
     float res = expected_y - p.y;
+    //abs value
     if (res < 0)
         res *= -1;
     return res;
@@ -145,11 +146,11 @@ float dev(Point p, Point **points, int size) {
 //    if (points == NULL) {
 //        throw "Array is a null ponter!";
 //    }
-    if (size <= 0) {
-        throw std::runtime_error("Division by zero!\n");
-    }
-    Line l = linear_reg(points, size);
-    return dev(p, l);
+//    if (size <= 0) {
+//        throw std::runtime_error("Division by zero!\n");
+//    }
+    Line line = linear_reg(points, size);
+    return dev(p, line);
 }
 
 
