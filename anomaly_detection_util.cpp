@@ -102,9 +102,9 @@ Line linear_reg(Point **points, int size) {
     if (size <= 0) {
         throw "Division by zero!";
     }
-    if (points == NULL) {
-        throw "Array is a null ponter!";
-    }
+//    if (points == NULL) {
+//        throw "Array is a null ponter!";
+//    }
     float x_array[size], y_array[size], avg_x, avg_y, a, b;
     // create arrays of the x and y values
     for (int i = 0; i < size; i++) {
@@ -140,9 +140,9 @@ float dev(Point p, Point **points, int size) {
     if (points == NULL) {
         throw "Array is a null ponter!";
     }
-    if (size <= 0) {
-        throw "Division by zero!";
-    }
+//    if (size <= 0) {
+//        throw "Division by zero!";
+//    }
     return dev(p, linear_reg(points, size));
 }
 
