@@ -94,8 +94,8 @@ float pearson(float *x, float *y, int size) {
 
 /**
  * performs a linear regression and returns the line equation
- * @param points
- * @param size
+ * @param points array of point objects
+ * @param size of array of points
  * @return a line that represents the linear regression
  */
 Line linear_reg(Point **points, int size) {
@@ -120,8 +120,8 @@ Line linear_reg(Point **points, int size) {
 
 /**
  * returns the deviation between point p and the line
- * @param p
- * @param l
+ * @param p single point
+ * @param l single line
  * @return deviation between point Y and the expected location
  */
 float dev(Point p, Line l) {
@@ -131,18 +131,18 @@ float dev(Point p, Line l) {
 
 /**
  * returns the deviation between point p and the line equation of the points
- * @param p
- * @param points
- * @param size
- * @return
+ * @param p single point
+ * @param points array of point objects
+ * @param size of array of points
+ * @return deviation between point p and the line equation
  */
 float dev(Point p, Point **points, int size) {
-    if (points == NULL) {
-        throw "Array is a null ponter!";
-    }
-//    if (size <= 0) {
-//        throw "Division by zero!";
+//    if (points == NULL) {
+//        throw "Array is a null ponter!";
 //    }
+    if (size <= 0) {
+        throw "Division by zero!";
+    }
     return dev(p, linear_reg(points, size));
 }
 
