@@ -3,9 +3,7 @@
  *
  * Author: Insert name and ID
  */
-#include <cstdlib>
 #include <cmath>
-#include <cstddef>
 #include <stdexcept>
 #include "anomaly_detection_util.h"
 
@@ -25,7 +23,7 @@ float avg(float *x, int size) {
         sum += x[i];
     }
     // return the avg
-    return sum / size;
+    return sum / (float)size;
 }
 
 /**
@@ -43,10 +41,10 @@ float var(float *x, int size) {
 //    }
     float mu = avg(x, size);
     float sum = 0;
-    for (int i = 0; i < size; ++i) {
-        sum += pow((x[i] - mu), 2);
+    for (int i = 0; i < size; ++i){
+        sum += (x[i] - mu) * (x[i] - mu);
     }
-    return sum / size;
+    return sum / (float)size;
 }
 
 /**
@@ -70,7 +68,7 @@ float cov(float *x, float *y, int size) {
     for (int i = 0; i < size; ++i) {
         sum += (x[i] - xm) * (y[i] - ym);
     }
-    return sum / size;
+    return sum / (float)size;
 }
 
 /**
