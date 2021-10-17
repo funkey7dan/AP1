@@ -90,8 +90,8 @@ float pearson(float *x, float *y, int size) {
     //calculate the covariance
     float cov_xy = cov(x, y, size);
     //define the standard deviation of x and y
-    float sig_x = pow(var(x, size), 0.5);
-    float sig_y = pow(var(y, size), 0.5);
+    float sig_x = sqrt(var(x, size));
+    float sig_y = sqrt(var(y, size));
     return cov_xy / (sig_x * sig_y);
 }
 
