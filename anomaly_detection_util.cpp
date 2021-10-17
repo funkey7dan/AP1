@@ -1,5 +1,5 @@
 /*
- * animaly_detection_util.cpp
+ * anomaly_detection_util.cpp
  *
  * Author: Insert name and ID
  */
@@ -35,9 +35,9 @@ float var(float *x, int size) {
     if (size <= 0) {
         throw "Division by zero!";
     }
-    if (x == NULL) {
-        throw "Array is a null ponter!";
-    }
+//    if (x == NULL) {
+//        throw "Array is a null ponter!";
+//    }
     float mu = avg(x, size);
     float sum = 0;
     for (int i = 0; i < size; ++i) {
@@ -58,9 +58,9 @@ float cov(float *x, float *y, int size) {
     if (size <= 0) {
         throw "Division by zero!";
     }
-    if (x == NULL || y==NULL) {
-        throw "Array is a null ponter!";
-    }
+//    if (x == NULL || y==NULL) {
+//        throw "Array is a null ponter!";
+//    }
     float xm = avg(x, size);
     float ym = avg(y, size);
     float sum = 0;
@@ -81,9 +81,9 @@ float pearson(float *x, float *y, int size) {
     if (size <= 0) {
         throw "Division by zero!";
     }
-    if (x == NULL || y==NULL) {
-        throw "Array is a null ponter!";
-    }
+//    if (x == NULL || y==NULL) {
+//        throw "Array is a null ponter!";
+//    }
     //calculate the covariance
     float cov_xy = cov(x, y, size);
     //define the standard deviation of x and y
