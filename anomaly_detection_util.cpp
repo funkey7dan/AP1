@@ -3,9 +3,10 @@
  *
  * Author: Insert name and ID
  */
+#include <cstdlib>
 #include <cmath>
 #include <cstddef>
-#include <math.h>
+#include <stdexcept>
 #include "anomaly_detection_util.h"
 
 /**
