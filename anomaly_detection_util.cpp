@@ -118,7 +118,8 @@ Line linear_reg(Point **points, int size) {
     avg_x = avg(x_array, size);
     avg_y = avg(y_array, size);
     b = avg_y - a * avg_x;
-    return Line(a, b);
+    Line l1 = Line(a, b);
+    return l1;
 }
 
 /**
