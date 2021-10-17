@@ -16,7 +16,9 @@
  */
 float avg(float *x, int size) {
     float sum = 0; // sum of the elements in the X array
-
+    if (size <= 0) {
+        throw std::runtime_error("Division by zero!\n");
+    }
     // sums all the elements in the array
     for (int i = 0; i < size; ++i) {
         sum += x[i];
@@ -33,7 +35,7 @@ float avg(float *x, int size) {
  */
 float var(float *x, int size) {
     if (size <= 0) {
-        throw "Division by zero!";
+        throw std::runtime_error("Division by zero!\n");
     }
 //    if (x == NULL) {
 //        throw "Array is a null ponter!";
@@ -56,7 +58,7 @@ float var(float *x, int size) {
 float cov(float *x, float *y, int size) {
     //xm and ym are the avgs of two given arrays.
     if (size <= 0) {
-        throw "Division by zero!";
+        throw std::runtime_error("Division by zero!\n");
     }
 //    if (x == NULL || y==NULL) {
 //        throw "Array is a null ponter!";
@@ -79,7 +81,7 @@ float cov(float *x, float *y, int size) {
  */
 float pearson(float *x, float *y, int size) {
     if (size <= 0) {
-        throw "Division by zero!";
+        throw std::runtime_error("Division by zero!\n");
     }
 //    if (x == NULL || y==NULL) {
 //        throw "Array is a null ponter!";
@@ -100,7 +102,7 @@ float pearson(float *x, float *y, int size) {
  */
 Line linear_reg(Point **points, int size) {
     if (size <= 0) {
-        throw "Division by zero!";
+        throw std::runtime_error("Division by zero!\n");
     }
 //    if (points == NULL) {
 //        throw "Array is a null ponter!";
@@ -141,7 +143,7 @@ float dev(Point p, Point **points, int size) {
 //        throw "Array is a null ponter!";
 //    }
     if (size <= 0) {
-        throw "Division by zero!";
+        throw std::runtime_error("Division by zero!\n");
     }
     return dev(p, linear_reg(points, size));
 }
