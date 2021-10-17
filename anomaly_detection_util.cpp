@@ -130,7 +130,10 @@ Line linear_reg(Point **points, int size) {
  */
 float dev(Point p, Line l) {
     float expected_y = l.f(p.x);
-    return std::abs(expected_y - p.y);
+    float res = expected_y - p.y;
+    if (res < 0)
+        res *= -1;
+    return res;
 }
 
 /**
@@ -147,7 +150,8 @@ float dev(Point p, Point **points, int size) {
     if (size <= 0) {
         throw std::runtime_error("Division by zero!\n");
     }
-    return dev(p, linear_reg(points, size));
+    Line l = linear_reg(points, size);
+    return dev(p, l);
 }
 
 
