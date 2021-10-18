@@ -4,7 +4,7 @@
  * Author: Insert name and ID
  */
 #include <cmath>
-#include <stdexcept>
+//#include <stdexcept>
 #include "anomaly_detection_util.h"
 
 /**
@@ -36,7 +36,7 @@ float var(float *x, int size) {
 //    if (size <= 0) {
 //        throw std::runtime_error("Division by zero!\n");
 //    }
-//    if (x == NULL) {
+//    if (x == nullptr) {
 //        throw "Array is a null ponter!";
 //    }
     float mu = avg(x, size);
@@ -59,7 +59,7 @@ float cov(float *x, float *y, int size) {
 //    if (size <= 0) {
 //        throw std::runtime_error("Division by zero!\n");
 //    }
-//    if (x == NULL || y==NULL) {
+//    if (x == nullptr || y == nullptr) {
 //        throw "Array is a null ponter!";
 //    }
     float xm = avg(x, size);
@@ -82,8 +82,8 @@ float pearson(float *x, float *y, int size) {
 //    if (size <= 0) {
 //        throw std::runtime_error("Division by zero!\n");
 //    }
-//    if (x == NULL || y==NULL) {
-//        throw "Array is a null ponter!";
+//    if (x == nullptr || y == nullptr) {
+//        throw "Array is a null pointer!";
 //    }
     //calculate the covariance
     float cov_xy = cov(x, y, size);
@@ -103,8 +103,8 @@ Line linear_reg(Point **points, int size) {
 //    if (size <= 0) {
 //        throw std::runtime_error("Division by zero!\n");
 //    }
-//    if (points == NULL) {
-//        throw "Array is a null ponter!";
+//    if (points == nullptr) {
+//        throw "Array is a null pointer!";
 //    }
     float x_array[size], y_array[size], avg_x, avg_y, a, b;
     // create arrays of the x and y values
@@ -143,8 +143,8 @@ float dev(Point p, Line l) {
  * @return deviation between point p and the line equation
  */
 float dev(Point p, Point **points, int size) {
-//    if (points == NULL) {
-//        throw "Array is a null ponter!";
+//    if (points == nullptr) {
+//        throw "Array is a null pointer!";
 //    }
 //    if (size <= 0) {
 //        throw std::runtime_error("Division by zero!\n");
