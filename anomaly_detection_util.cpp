@@ -1,7 +1,7 @@
 /*
  * anomaly_detection_util.cpp
  *
- * Author: Insert name and ID
+ * Authors: ***REMOVED*** Daniel Bronfman & 316163922 Tomer Pardilov
  */
 #include <cmath>
 //#include <stdexcept>
