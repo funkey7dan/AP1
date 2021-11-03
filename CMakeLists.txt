@@ -3,4 +3,4 @@ project(AP1)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(AP1 main.cpp MainTrain.cpp)
+add_executable(AP1 main.cpp MainTrain.cpp timeseries.cpp)
