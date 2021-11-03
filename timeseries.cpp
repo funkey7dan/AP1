@@ -4,7 +4,7 @@
 
 // constructor
 TimeSeries::TimeSeries(const char *CSVfileName) {
-    filename = CSVfileName;
+    this->filename = CSVfileName;
     constructDataBase(data);
 }
 
@@ -23,9 +23,8 @@ float TimeSeries::getValueFromVector(int i, int j) {
     return data.at(j).second.at(i);
 }
 
-// private method that is called from constructor only, the vector
-// is passed by reference to avoid copy.
-void TimeSeries::constructDataBase(vector<std::pair<std::string, std::vector<float>>> &data) {
+// private method that is called from constructor only
+void TimeSeries::constructDataBase() {
     // Reads a CSV file into a vector of <string, vector<int>> pairs where
     // each pair represents <column name, column values>
 
@@ -51,7 +50,7 @@ void TimeSeries::constructDataBase(vector<std::pair<std::string, std::vector<flo
         while (std::getline(ss, colname, ',')) {
 
             // Initialize and add <colname, int vector> pairs to data
-            data.push_back({colname, std::vector<float>{}});
+            this->data.push_back({colname, std::vector<float>{}});
         }
     }
 
@@ -67,12 +66,11 @@ void TimeSeries::constructDataBase(vector<std::pair<std::string, std::vector<flo
         // Extract each float
         while (std::getline(ss, token, ',')) {
             // Add the current float-type to the 'colIdx' column's values vector
-            data.at(colIdx).second.push_back(std::stof(token));
+            this->data.at(colIdx).second.push_back(std::stof(token));
             // Increment the column index
             colIdx++;
         }
-
-        // Close file
-        myFile.close();
     }
+    // Close file
+    myFile.close();
 }
