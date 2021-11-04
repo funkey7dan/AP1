@@ -9,17 +9,17 @@ TimeSeries::TimeSeries(const char *CSVfileName) {
 }
 
 // getter
-const char *TimeSeries::getFileName() const{
+const char *TimeSeries::getFileName() const {
     return filename;
 }
 
 // getter
-std::vector<std::pair<std::string, std::vector<float>>> TimeSeries::getDataBase() const{
+std::vector<std::pair<std::string, std::vector<float>>> TimeSeries::getDataBase() const {
     return data;
 }
 
 // get specific value from data
-float TimeSeries::getValueFromVector(int i, int j) const{
+float TimeSeries::getValueFromVector(int i, int j) const {
     return data.at(j).second.at(i);
 }
 
@@ -73,4 +73,14 @@ void TimeSeries::constructDataBase() {
     }
     // Close file
     myFile.close();
+}
+
+// setter for threshold
+void TimeSeries::set_thershold(float new_thr) const{
+    this->thershold = new_thr;
+}
+
+// setter for correlation_vector
+void TimeSeries::set_correlation_vector(std::vector<correlatedFeatures> to_set) const{
+    this->correlation_vector = to_set;
 }

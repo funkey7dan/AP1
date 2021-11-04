@@ -4,8 +4,10 @@
  * Authors: ***REMOVED*** Daniel Bronfman & 316163922 Tomer Pardilov
  */
 #include <cmath>
+#include <vector>
 //#include <stdexcept>
 #include "anomaly_detection_util.h"
+
 
 /**
  * Calculate the avg of a given range
@@ -118,6 +120,22 @@ Line linear_reg(Point **points, int size) {
     b = avg_y - a * avg_x;
     Line l = Line(a, b);
     return l;
+}
+
+/**
+ * Create a vector of points from 2 correlated features
+ * @param cf
+ * @return
+ */
+std::vector<Point> points_from_correlatedFeatures(std::vector<float> a, std::vector<float> b){
+    std::vector<Point> empty_vector;
+    int len = a.size();
+    for (int i=0;i<len;i++){
+        Point *temp_point = nullptr;
+        *temp_point = Point(a[i],b[i]);
+        empty_vector.push_back(std::move(*temp_point));
+    }
+    return empty_vector;
 }
 
 /**
