@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string>
-#include "SimpleAnomalyDetector.h"
+//#include "SimpleAnomalyDetector.h"
 
 using namespace std;
 
@@ -19,8 +19,6 @@ private:
     // it is private because we will call it from the constructor only
     void constructDataBase();
     // vector of the correlation pairs indecises and their pearson correlation
-    mutable std::vector<correlatedFeatures> correlation_vector;
-    mutable float thershold;
 
 public:
     explicit TimeSeries(const char *CSVfileName);
@@ -33,7 +31,7 @@ public:
     float getValueFromVector(int i, int j) const; //row i column j
     void set_thershold(float new_thr)const;
 
-    void set_correlation_vector (std::vector<correlatedFeatures> to_set) const;
+
     int getRowSize() const;
     int getColSize() const;
     string getColName(int i) const;

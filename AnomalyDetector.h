@@ -2,10 +2,9 @@
 
 #ifndef ANOMALYDETECTOR_H_
 #define ANOMALYDETECTOR_H_
-
+#include "timeseries.h"
 #include <string>
 #include <vector>
-#include "timeseries.h"
 #include "math.h"
 using namespace std;
 

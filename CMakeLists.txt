@@ -3,4 +3,4 @@ project(AP1)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(AP1 main.cpp MainTrain.cpp timeseries.cpp SimpleAnomalyDetector.cpp)
+add_executable(AP1 unit_tests.cpp timeseries.cpp SimpleAnomalyDetector.cpp anomaly_detection_util.cpp MainTrain.cpp)

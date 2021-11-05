@@ -1,7 +1,7 @@
+#include "timeseries.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include "timeseries.h"
 
 // constructor
 TimeSeries::TimeSeries(const char *CSVfileName) {
@@ -16,7 +16,7 @@ const char *TimeSeries::getFileName() const {
 
 // getter
 std::vector<std::pair<std::string, std::vector<float>>> TimeSeries::getDataBase() const {
-    return data;
+    return this->data;
 }
 
 // get specific value from data
@@ -76,15 +76,11 @@ void TimeSeries::constructDataBase() {
     myFile.close();
 }
 
-// setter for threshold
-void TimeSeries::set_thershold(float new_thr) const{
-    this->thershold = new_thr;
-}
+//// setter for threshold
+//void TimeSeries::set_thershold(float new_thr) const{
+//    this->thershold = new_thr;
+//}
 
-// setter for correlation_vector
-void TimeSeries::set_correlation_vector(std::vector<correlatedFeatures> to_set) const{
-    this->correlation_vector = to_set;
-}
 
 int TimeSeries::getRowSize() const{
     return data.size();
@@ -96,7 +92,7 @@ int TimeSeries::getColSize() const {
 
 string TimeSeries::getColName(int i) const {
     try {
-        return data[i].first;
+        return this->data[i].first;
     }
     catch (exception exception) {
         std::cout << "Can't access index" << endl;
