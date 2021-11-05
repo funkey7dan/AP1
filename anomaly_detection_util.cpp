@@ -132,7 +132,6 @@ std::vector<Point*> points_from_correlatedFeatures(std::vector<float> a, std::ve
     int len = a.size();
     for (int i=0;i<len;i++){
         Point* temp_point_p = new Point(a[i],b[i]);
-        // TODO delete all pointers
         empty_vector.emplace_back((temp_point_p));
         delete temp_point_p;
     }
