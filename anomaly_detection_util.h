@@ -29,6 +29,7 @@ class Point{
 public:
     float x,y;
     Point(float x, float y):x(x),y(y){}
+    ~Point()= default;
 };
 
 // performs a linear regression and returns the line equation

@@ -8,7 +8,7 @@ SimpleAnomalyDetector::SimpleAnomalyDetector() {
 }
 
 SimpleAnomalyDetector::~SimpleAnomalyDetector() {
-    // TODO Auto-generated destructor stub
+
 }
 
 
@@ -34,20 +34,25 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
         } // TODO: check plaster
         correlatedFeatures cf_temp;
         cf_temp.feature1 = ts.getColName(i);
-        if(correlating_index==-1){
+        if (correlating_index == -1) {
             continue;
         }
         cf_temp.feature2 = ts.getColName(correlating_index);
         cf_temp.corrlation = max_correlation;
         // TODO:calculate threshold for each pair
         cf_temp.threshold = 0.9;
-        std::vector<Point*> points_arr = points_from_correlatedFeatures(dataBase[i].second,
-                                                                       dataBase[correlating_index].second);
+        std::vector<Point *> points_arr = points_from_correlatedFeatures(dataBase[i].second,
+                                                                         dataBase[correlating_index].second);
         Point **points;
         points = points_arr.data(); // TODO: check plaster
 
         cf_temp.lin_reg = linear_reg(points, points_arr.size());
         this->correlation_vector.push_back(cf_temp);
+        int points_size = sizeof(points);
+//        for (int i = 0; i < points_size; i++) {
+//            delete *(points[i]);
+//        }
+//        //delete[] *points;
     }
 
 }
