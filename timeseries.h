@@ -36,6 +36,7 @@ public:
     void set_correlation_vector (std::vector<correlatedFeatures> to_set) const;
     int getRowSize() const;
     int getColSize() const;
+    string getColName(int i) const;
 };
 
 #endif /* TIMESERIES_H_ */

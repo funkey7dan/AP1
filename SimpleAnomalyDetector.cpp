@@ -30,8 +30,8 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
             }
         }
         correlatedFeatures cf_temp;
-        cf_temp.feature1 = ts.getDataBase()[i].first;
-        cf_temp.feature2 = ts.getDataBase()[correlating_index].first;
+        cf_temp.feature1 = ts.getColName(i);
+        cf_temp.feature2 = ts.getColName(correlating_index);
         cf_temp.corrlation = max_correlation;
         // TODO:calculate threshold for each pair
         cf_temp.threshold = 0.9;
@@ -41,7 +41,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
         *points = &points_arr[0];
         cf_temp.lin_reg = linear_reg(points,points_arr.size());
 //        cf_temp->(linear_reg(points,points_arr.size()));
-        correlations_vector.push_back(std::move(*cf_temp));
+        correlations_vector.push_back(cf_temp);
     }
     ts.set_correlation_vector(correlations_vector);
 }

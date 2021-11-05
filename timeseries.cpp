@@ -1,5 +1,6 @@
 #include <fstream>
 #include <sstream>
+#include <iostream>
 #include "timeseries.h"
 
 // constructor
@@ -91,5 +92,14 @@ int TimeSeries::getRowSize() const{
 
 int TimeSeries::getColSize() const {
     return data[0].second.size();
+}
+
+string TimeSeries::getColName(int i) const {
+    try {
+        return data[i].first;
+    }
+    catch (exception exception) {
+        std::cout << "Can't access index" << endl;
+    }
 }
 
