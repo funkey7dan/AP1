@@ -34,7 +34,8 @@ public:
     void set_thershold(float new_thr)const;
 
     void set_correlation_vector (std::vector<correlatedFeatures> to_set) const;
-
+    int getRowSize() const;
+    int getColSize() const;
 };
 
 #endif /* TIMESERIES_H_ */

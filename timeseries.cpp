@@ -84,3 +84,12 @@ void TimeSeries::set_thershold(float new_thr) const{
 void TimeSeries::set_correlation_vector(std::vector<correlatedFeatures> to_set) const{
     this->correlation_vector = to_set;
 }
+
+int TimeSeries::getRowSize() const{
+    return data.size();
+}
+
+int TimeSeries::getColSize() const {
+    return data[0].second.size();
+}
+

@@ -4,8 +4,7 @@
 
 
 SimpleAnomalyDetector::SimpleAnomalyDetector() {
-    // TODO Auto-generated constructor stub
-
+    threshold = 0.9;
 }
 
 SimpleAnomalyDetector::~SimpleAnomalyDetector() {
@@ -17,7 +16,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
     // TODO Auto-generated destructor stub
     // vector to hold the most correlating column for each column - pair of indices
     vector<correlatedFeatures> correlations_vector;
-    int len = ts.getDataBase().size(), vector_size = ts.getDataBase()[0].second.size(); // get number of columns
+    int len = ts.getRowSize(), vector_size = ts.getColSize(); // get number of columns
     for (int i = 0; i < len; i++) {
         auto vect1 = ts.getDataBase()[i].second.data();
         float max_correlation = 0;
