@@ -71,7 +71,7 @@ void SimpleAnomalyDetector::init_feature(correlatedFeatures &cf, string col1, st
     cf.corrlation = mc;
     std::vector<Point *> points_arr = points_from_correlatedFeatures(v1, v2);
     Point **points;
-    points = points_arr.data(); // TODO: check plaster
+    points = points_arr.data();// TODO: check plaster
 
     cf.lin_reg = linear_reg(points, points_arr.size());
     cf.threshold = find_threshold(points, cf.lin_reg, points_arr.size()) * 1.1;
