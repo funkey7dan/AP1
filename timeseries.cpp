@@ -10,17 +10,17 @@ TimeSeries::TimeSeries(const char *CSVfileName) {
 }
 
 // getter
-const char *TimeSeries::getFileName() const {
+const char *TimeSeries::getFileName() const{
     return filename;
 }
 
 // getter
-std::vector<std::pair<std::string, std::vector<float>>> TimeSeries::getDataBase() const {
+std::vector<std::pair<std::string, std::vector<float>>> TimeSeries::getDataBase() const{
     return this->data;
 }
 
 // get specific value from data
-float TimeSeries::getValueFromVector(int i, int j) const {
+float TimeSeries::getValueFromVector(int i, int j) const{
     return data.at(j).second.at(i);
 }
 

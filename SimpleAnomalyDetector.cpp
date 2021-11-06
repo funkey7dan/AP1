@@ -1,6 +1,7 @@
 
 #include <tuple>
 #include "SimpleAnomalyDetector.h"
+#include "anomaly_detection_util.h"
 
 
 SimpleAnomalyDetector::SimpleAnomalyDetector() {
@@ -33,31 +34,46 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
             }
         } // TODO: check plaster
         correlatedFeatures cf_temp;
-        cf_temp.feature1 = ts.getColName(i);
-        if (correlating_index == -1) {
-            continue;
-        }
-        cf_temp.feature2 = ts.getColName(correlating_index);
-        cf_temp.corrlation = max_correlation;
-        // TODO:calculate threshold for each pair
-        cf_temp.threshold = 0.9;
-        std::vector<Point *> points_arr = points_from_correlatedFeatures(dataBase[i].second,
-                                                                         dataBase[correlating_index].second);
-        Point **points;
-        points = points_arr.data(); // TODO: check plaster
-
-        cf_temp.lin_reg = linear_reg(points, points_arr.size());
+        init_feature(cf_temp, ts.getColName(i),ts.getColName(correlating_index),
+                     dataBase[i].second, dataBase[correlating_index].second,  max_correlation);
         this->correlation_vector.push_back(cf_temp);
-        int points_size = sizeof(points);
+//        int points_size = sizeof(points);
 //        for (int i = 0; i < points_size; i++) {
 //            delete *(points[i]);
 //        }
 //        //delete[] *points;
     }
-
 }
 
 vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
     // TODO Auto-generated destructor stub
+}
+
+float SimpleAnomalyDetector::find_threshold(Point **points, Line l, int len) {
+    float max = 0;
+    for(int i = 0; i < len; i++){
+        float deviation = dev(*points[i], l);
+        if (deviation > max){
+            max = deviation;
+        }
+    }
+    return max;
+}
+
+void SimpleAnomalyDetector::init_feature(correlatedFeatures &cf, string col1, string col2,
+                                         vector<float> &v1, vector<float> &v2, float mc) {
+    cf.feature1 = col1;
+    // check with daniel this block of code
+//    if (correlating_index == -1) {
+//        continue;
+//    }
+    cf.feature2 = col2;
+    cf.corrlation = mc;
+    std::vector<Point *> points_arr = points_from_correlatedFeatures(v1, v2);
+    Point **points;
+    points = points_arr.data(); // TODO: check plaster
+
+    cf.lin_reg = linear_reg(points, points_arr.size());
+    cf.threshold = find_threshold(points, cf.lin_reg, points_arr.size());
 }
 

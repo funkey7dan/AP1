@@ -8,7 +8,7 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 #include <math.h>
-#include "MainTrain.h"
+//#include "MainTrain.h"
 
 using namespace std;
 

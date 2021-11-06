@@ -27,7 +27,9 @@ public:
 
 	virtual void learnNormal(const TimeSeries& ts);
 	virtual vector<AnomalyReport> detect(const TimeSeries& ts);
-
+    virtual float find_threshold(Point** points, Line l, int len);
+    virtual void init_feature(correlatedFeatures &cf, string col1, string col2,
+                              vector<float> &v1, vector<float> &v2, float mc);
 	vector<correlatedFeatures> getNormalModel(){
 		return this->cf;
 	}
