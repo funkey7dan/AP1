@@ -74,6 +74,6 @@ void SimpleAnomalyDetector::init_feature(correlatedFeatures &cf, string col1, st
     points = points_arr.data(); // TODO: check plaster
 
     cf.lin_reg = linear_reg(points, points_arr.size());
-    cf.threshold = find_threshold(points, cf.lin_reg, points_arr.size());
+    cf.threshold = find_threshold(points, cf.lin_reg, points_arr.size()) * 1.1;
 }
 
