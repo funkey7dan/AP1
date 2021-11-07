@@ -22,7 +22,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
         float max_correlation = 0;
         int correlating_index = -1;
 
-        for (int j = i + 1; j < len - 1; j++) {
+        for (int j = i + 1; j < len; j++) {
             std::pair<std::string, std::vector<float>> temp_pair2 = (dataBase)[j];
             float *vect2 = temp_pair2.second.data();
             float pearson_value = abs(pearson(vect1, vect2, vector_size));
@@ -31,7 +31,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
                 correlating_index = j;
             }
             if (max_correlation < this->threshold) {
-                continue;
+                correlating_index = -1;
             }
         }
         if (correlating_index == -1) {
