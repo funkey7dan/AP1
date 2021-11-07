@@ -8,9 +8,7 @@ SimpleAnomalyDetector::SimpleAnomalyDetector() {
     threshold = 0.9;
 }
 
-SimpleAnomalyDetector::~SimpleAnomalyDetector() {
-
-}
+SimpleAnomalyDetector::~SimpleAnomalyDetector() = default;
 
 
 void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
@@ -31,6 +29,9 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
             if (pearson_value > max_correlation) {
                 max_correlation = pearson_value;
                 correlating_index = j;
+            }
+            if (max_correlation < this->threshold) {
+                continue;
             }
         }
         if (correlating_index == -1) {
@@ -61,10 +62,6 @@ float SimpleAnomalyDetector::find_threshold(Point **points, Line l, int len) {
 void SimpleAnomalyDetector::init_feature(correlatedFeatures &cf, string col1, string col2,
                                          vector<float> &v1, vector<float> &v2, float mc) {
     cf.feature1 = col1;
-    // check with daniel this block of code
-//    if (correlating_index == -1) {
-//        continue;
-//    }
     cf.feature2 = col2;
     cf.corrlation = mc;
     std::vector<Point *> points_arr = points_from_correlatedFeatures(v1, v2);
