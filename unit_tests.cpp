@@ -25,7 +25,7 @@ int main(){
 	SimpleAnomalyDetector ad;
 	ad.learnNormal(ts);
 	vector<correlatedFeatures> cf=ad.getNormalModel();
-    std::cout<<cf.size()<<std::endl;
+
 	if(cf.size()!=2)
 		std::cout<<"wrong size of correlated features (-40)"<<std::endl;
 	else

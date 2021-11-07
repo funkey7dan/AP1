@@ -32,16 +32,14 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
                 max_correlation = pearson_value;
                 correlating_index = j;
             }
-        } // TODO: check plaster
+        }
+        if (correlating_index == -1) {
+            continue;
+        }
         correlatedFeatures cf_temp;
-        init_feature(cf_temp, ts.getColName(i),ts.getColName(correlating_index),
-                     dataBase[i].second, dataBase[correlating_index].second,  max_correlation);
-        this->correlation_vector.push_back(cf_temp);
-//        int points_size = sizeof(points);
-//        for (int i = 0; i < points_size; i++) {
-//            delete *(points[i]);
-//        }
-//        //delete[] *points;
+        init_feature(cf_temp, ts.getColName(i), ts.getColName(correlating_index),
+                     dataBase[i].second, dataBase[correlating_index].second, max_correlation);
+        this->cf.push_back(cf_temp);
     }
 }
 
@@ -51,9 +49,9 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
 
 float SimpleAnomalyDetector::find_threshold(Point **points, Line l, int len) {
     float max = 0;
-    for(int i = 0; i < len; i++){
+    for (int i = 0; i < len; i++) {
         float deviation = dev(*points[i], l);
-        if (deviation > max){
+        if (deviation > max) {
             max = deviation;
         }
     }
