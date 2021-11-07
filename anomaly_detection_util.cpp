@@ -5,6 +5,7 @@
  */
 #include <cmath>
 #include <vector>
+#include <memory>
 //#include <stdexcept>
 #include "anomaly_detection_util.h"
 
@@ -133,7 +134,7 @@ std::vector<Point*> points_from_correlatedFeatures(std::vector<float> a, std::ve
     for (int i=0;i<len;i++){
         Point* temp_point_p = new Point(a[i],b[i]);
         empty_vector.emplace_back((temp_point_p));
-        delete temp_point_p;
+        //delete temp_point_p;
     }
     return empty_vector;
 }
