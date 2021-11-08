@@ -21,11 +21,10 @@ private:
     // it is private because we will call it from the constructor only
     void constructDataBase();
     // vector of the correlation pairs indecises and their pearson correlation
-    int get_col_by_name(std::string name);
 
 public:
     explicit TimeSeries(const char *CSVfileName);
-
+    vector<float> get_col_by_name(std::string name);
     const char *getFileName() const;
 
     vector<pair<std::string, std::vector<float>>> getDataBase() const;

@@ -4,28 +4,37 @@
 #include <iostream>
 
 // constructor
-TimeSeries::TimeSeries(const char *CSVfileName) {
+TimeSeries::TimeSeries(const char *CSVfileName)
+{
+
     this->filename = CSVfileName;
     constructDataBase();
 }
 
 // getter
-const char *TimeSeries::getFileName() const{
+const char *TimeSeries::getFileName() const
+{
+
     return filename;
 }
 
 // getter
-std::vector<std::pair<std::string, std::vector<float>>> TimeSeries::getDataBase() const{
+std::vector<std::pair<std::string, std::vector<float>>> TimeSeries::getDataBase() const
+{
+
     return this->data;
 }
 
 // get specific value from data
-float TimeSeries::getValueFromVector(int i, int j) const{
+float TimeSeries::getValueFromVector(int i, int j) const
+{
+
     return data.at(j).second.at(i);
 }
 
 // private method that is called from constructor only
-void TimeSeries::constructDataBase() {
+void TimeSeries::constructDataBase()
+{
     // Reads a CSV file into a vector of <string, vector<int>> pairs where
     // each pair represents <column name, column values>
 
@@ -33,14 +42,16 @@ void TimeSeries::constructDataBase() {
     std::ifstream myFile(filename);
 
     // Make sure the file is open
-    if (!myFile.is_open()) throw std::runtime_error("Could not open file");
+    if(!myFile.is_open())
+    { throw std::runtime_error("Could not open file"); }
 
     // Helper vars
     std::string line, colname;
     float val;
 
     // Read the column names
-    if (myFile.good()) {
+    if(myFile.good())
+    {
         // Extract the first line in the file
         std::getline(myFile, line);
 
@@ -48,17 +59,19 @@ void TimeSeries::constructDataBase() {
         std::stringstream ss(line);
 
         // Extract each column name
-        while (std::getline(ss, colname, ',')) {
+        while (std::getline(ss, colname, ','))
+        {
             int i = 0;
             // Initialize and add <colname, int vector> pairs to data
             this->data.push_back({colname, std::vector<float>{}});
-            this->col_name_to_index.insert(pair<string,int>(colname,i));
+            this->col_name_to_index.insert(pair<string, int>(colname, i));
             i++;
         }
     }
 
     // Read data, line by line
-    while (std::getline(myFile, line)) {
+    while (std::getline(myFile, line))
+    {
         // Create a stringstream of the current line
         std::istringstream ss(line);
         std::string token;
@@ -67,7 +80,8 @@ void TimeSeries::constructDataBase() {
         int colIdx = 0;
 
         // Extract each float
-        while (std::getline(ss, token, ',')) {
+        while (std::getline(ss, token, ','))
+        {
             // Add the current float-type to the 'colIdx' column's values vector
             this->data.at(colIdx).second.push_back(std::stof(token));
             // Increment the column index
@@ -85,26 +99,36 @@ void TimeSeries::constructDataBase() {
 
 
 
-int TimeSeries::getRowSize() const{
+int TimeSeries::getRowSize() const
+{
+
     return data.size();
 }
 
-int TimeSeries::getColSize() const {
-    return data[0].second.size();
+int TimeSeries::getColSize() const
+{
+
+    return data[ 0 ].second.size();
 }
 
-string TimeSeries::getColName(int i) const {
-    try {
-        return this->data[i].first;
+string TimeSeries::getColName(int i) const
+{
+
+    try
+    {
+        return this->data[ i ].first;
     }
-    catch (exception exception) {
+    catch (exception exception)
+    {
         std::cout << "Can't access index" << endl;
     }
 }
 
-int TimeSeries::get_col_by_name(std::string name)
+vector<float> TimeSeries::get_col_by_name(std::string name)
 {
-    return this->col_name_to_index[name];
+
+    int index = this->col_name_to_index[ name ];
+    return this->data[ index ].second;
 }
 
 
