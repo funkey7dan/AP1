@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <map>
 //#include "SimpleAnomalyDetector.h"
 
 using namespace std;
@@ -14,6 +15,7 @@ private:
     // we are going to store the data in vector of vectors while each
     // vector is column in the file
     std::vector<std::pair<std::string, std::vector<float>>> data;
+    std::map<string, int> col_name_to_index;
 
     // read from file to the vector
     // it is private because we will call it from the constructor only

@@ -49,9 +49,11 @@ void TimeSeries::constructDataBase() {
 
         // Extract each column name
         while (std::getline(ss, colname, ',')) {
-
+            int i = 0;
             // Initialize and add <colname, int vector> pairs to data
             this->data.push_back({colname, std::vector<float>{}});
+            this->col_name_to_index.insert(pair<string,int>(colname,i));
+            i++;
         }
     }
 
