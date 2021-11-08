@@ -5,8 +5,8 @@
 #include "AnomalyDetector.h"
 #include <vector>
 #include <algorithm>
-#include <string.h>
-#include <math.h>
+#include <cstring>
+#include <cmath>
 
 class TimeSeries;
 
@@ -14,7 +14,7 @@ struct correlatedFeatures{
 	string feature1,feature2;  // names of the correlated features
 	float corrlation;
 	Line lin_reg;
-	float threshold;
+	float threshold; // the threshold for normal values
 };
 
 class SimpleAnomalyDetector:public TimeSeriesAnomalyDetector{
@@ -33,7 +33,7 @@ public:
 	vector<correlatedFeatures> getNormalModel(){
 		return this->cf;
 	}
-    std::vector<Point *> points_from_correlatedFeatures(std::vector<float> a, std::vector<float> b);
+    static std::vector<Point *> points_from_correlatedFeatures(std::vector<float> a, std::vector<float> b);
 
 };
 

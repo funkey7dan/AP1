@@ -4,9 +4,6 @@
  * Authors: ***REMOVED*** Daniel Bronfman & 316163922 Tomer Pardilov
  */
 #include <cmath>
-#include <vector>
-#include <memory>
-//#include <stdexcept>
 #include "anomaly_detection_util.h"
 
 /**
@@ -15,7 +12,7 @@
  * @param size - size of the sample
  * @return the avg of the range
  */
-float avg(float *x, int size)
+float avg(const float *x, int size)
 {
 
     float sum = 0; // sum of the elements in the X array

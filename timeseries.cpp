@@ -12,31 +12,20 @@ TimeSeries::TimeSeries(const char *CSVfileName)
 }
 
 // getter
-const char *TimeSeries::getFileName() const
-{
-
-    return filename;
-}
-
-// getter
 std::vector<std::pair<std::string, std::vector<float>>> TimeSeries::getDataBase() const
 {
 
     return this->data;
 }
 
-// get specific value from data
-float TimeSeries::getValueFromVector(int i, int j) const
-{
-
-    return data.at(j).second.at(i);
-}
-
-// private method that is called from constructor only
+/**
+ * private method that is called from constructor only
+ * Reads a CSV file into a vector of <string, vector<int>> pairs where
+ * each pair represents <column name, column values>
+ */
 void TimeSeries::constructDataBase()
 {
-    // Reads a CSV file into a vector of <string, vector<int>> pairs where
-    // each pair represents <column name, column values>
+
 
     // Create an input filestream
     std::ifstream myFile(filename);
@@ -47,7 +36,6 @@ void TimeSeries::constructDataBase()
 
     // Helper vars
     std::string line, colname;
-    float val;
 
     // Read the column names
     if(myFile.good())
@@ -91,25 +79,31 @@ void TimeSeries::constructDataBase()
     myFile.close();
 }
 
-//// setter for threshold
-//void TimeSeries::set_thershold(float new_thr) const{
-//    this->thershold = new_thr;
-//}
-
-
-
+/**
+ *
+ * @return the row size
+ */
 int TimeSeries::getRowSize() const
 {
 
     return data.size();
 }
 
+/**
+ *
+ * @return the column length
+ */
 int TimeSeries::getColSize() const
 {
 
     return data[ 0 ].second.size();
 }
 
+/**
+ * Getter for column name by index
+ * @param i index
+ * @return the column name
+ */
 string TimeSeries::getColName(int i) const
 {
 
@@ -117,13 +111,18 @@ string TimeSeries::getColName(int i) const
     {
         return this->data[ i ].first;
     }
-    catch (exception exception)
+    catch (exception& exception)
     {
         std::cout << "Can't access index" << endl;
     }
 }
 
-vector<float> TimeSeries::get_col_by_name(std::string name) const
+/**
+ *
+ * @param name the name of the column we want to get
+ * @return a vector representation of the requested column.
+ */
+vector<float> TimeSeries::get_col_by_name(const std::string& name) const
 {
 
     int index = this->col_name_to_index.at(name);

@@ -4,7 +4,6 @@
 #include <vector>
 #include <string>
 #include <map>
-//#include "SimpleAnomalyDetector.h"
 
 using namespace std;
 
@@ -24,15 +23,8 @@ private:
 
 public:
     explicit TimeSeries(const char *CSVfileName);
-    vector<float> get_col_by_name(std::string name) const;
-    const char *getFileName() const;
-
+    vector<float> get_col_by_name(const std::string& name) const;
     vector<pair<std::string, std::vector<float>>> getDataBase() const;
-
-    // get specific value from data
-    float getValueFromVector(int i, int j) const; //row i column j
-    void set_thershold(float new_thr)const;
-
 
     int getRowSize() const;
     int getColSize() const;
