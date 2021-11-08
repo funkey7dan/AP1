@@ -9,21 +9,23 @@
 //#include <stdexcept>
 #include "anomaly_detection_util.h"
 
-
 /**
  * Calculate the avg of a given range
  * @param x - array of floats
  * @param size - size of the sample
  * @return the avg of the range
  */
-float avg(float *x, int size) {
+float avg(float *x, int size)
+{
+
     float sum = 0; // sum of the elements in the X array
 //    if (size <= 0) {
 //        throw std::runtime_error("Division by zero!\n");
 //    }
     // sums all the elements in the array
-    for (int i = 0; i < size; ++i) {
-        sum += x[i];
+    for (int i = 0; i < size; ++i)
+    {
+        sum += x[ i ];
     }
     // return the avg
     return sum / size;
@@ -35,7 +37,8 @@ float avg(float *x, int size) {
  * @param size size of the array
  * @return variance
  */
-float var(float *x, int size) {
+float var(float *x, int size)
+{
 //    if (size <= 0) {
 //        throw std::runtime_error("Division by zero!\n");
 //    }
@@ -44,8 +47,9 @@ float var(float *x, int size) {
 //    }
     float mu = avg(x, size);
     float sum = 0;
-    for (int i = 0; i < size; ++i){
-        sum += x[i] * x[i];
+    for (int i = 0; i < size; ++i)
+    {
+        sum += x[ i ] * x[ i ];
     }
     return sum / size - mu * mu;
 }
@@ -57,7 +61,8 @@ float var(float *x, int size) {
  * @param size size of arrays.
  * @return covariance between x and y.
  */
-float cov(float *x, float *y, int size) {
+float cov(float *x, float *y, int size)
+{
     //xm and ym are the avgs of two given arrays.
 //    if (size <= 0) {
 //        throw std::runtime_error("Division by zero!\n");
@@ -68,8 +73,9 @@ float cov(float *x, float *y, int size) {
     float xm = avg(x, size);
     float ym = avg(y, size);
     float sum = 0;
-    for (int i = 0; i < size; ++i) {
-        sum += x[i] * y[i];
+    for (int i = 0; i < size; ++i)
+    {
+        sum += x[ i ] * y[ i ];
     }
     return sum / size - xm * ym;
 }
@@ -81,7 +87,8 @@ float cov(float *x, float *y, int size) {
  * @param size of x and y.
  * @return Pearson correlation coefficient.
  */
-float pearson(float *x, float *y, int size) {
+float pearson(float *x, float *y, int size)
+{
 //    if (size <= 0) {
 //        throw std::runtime_error("Division by zero!\n");
 //    }
@@ -102,7 +109,8 @@ float pearson(float *x, float *y, int size) {
  * @param size of array of points
  * @return a line that represents the linear regression
  */
-Line linear_reg(Point **points, int size) {
+Line linear_reg(Point **points, int size)
+{
 //    if (size <= 0) {
 //        throw std::runtime_error("Division by zero!\n");
 //    }
@@ -111,9 +119,10 @@ Line linear_reg(Point **points, int size) {
 //    }
     float x_array[size], y_array[size], avg_x, avg_y, a, b;
     // create arrays of the x and y values
-    for (int i = 0; i < size; i++) {
-        x_array[i] = points[i]->x;
-        y_array[i] = points[i]->y;
+    for (int i = 0; i < size; i++)
+    {
+        x_array[ i ] = points[ i ]->x;
+        y_array[ i ] = points[ i ]->y;
     }
     a = (cov(x_array, y_array, size)) / var(x_array, size);
     avg_x = avg(x_array, size);
@@ -128,11 +137,14 @@ Line linear_reg(Point **points, int size) {
  * @param cf
  * @return
  */
-std::vector<Point*> points_from_correlatedFeatures(std::vector<float> a, std::vector<float> b){
-    std::vector<Point*> empty_vector;
+std::vector<Point *> points_from_correlatedFeatures(std::vector<float> a, std::vector<float> b)
+{
+
+    std::vector<Point *> empty_vector;
     int len = a.size();
-    for (int i=0;i<len;i++){
-        Point* temp_point_p = new Point(a[i],b[i]);
+    for (int i = 0; i < len; i++)
+    {
+        Point *temp_point_p = new Point(a[ i ], b[ i ]);
         empty_vector.emplace_back((temp_point_p));
         //delete temp_point_p;
     }
@@ -145,12 +157,16 @@ std::vector<Point*> points_from_correlatedFeatures(std::vector<float> a, std::ve
  * @param l single line
  * @return deviation between point Y and the expected location
  */
-float dev(Point p, Line l) {
+float dev(Point p, Line l)
+{
+
     float expected_y = l.f(p.x);
     float res = expected_y - p.y;
     //abs value
-    if (res < 0)
+    if(res < 0)
+    {
         res *= -1;
+    }
     return res;
 }
 
@@ -161,7 +177,8 @@ float dev(Point p, Line l) {
  * @param size of array of points
  * @return deviation between point p and the line equation
  */
-float dev(Point p, Point **points, int size) {
+float dev(Point p, Point **points, int size)
+{
 //    if (points == nullptr) {
 //        throw "Array is a null pointer!";
 //    }
@@ -171,6 +188,7 @@ float dev(Point p, Point **points, int size) {
     Line line = linear_reg(points, size);
     return dev(p, line);
 }
+
 
 
 

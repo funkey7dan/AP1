@@ -84,6 +84,7 @@ void TimeSeries::constructDataBase() {
 //}
 
 
+
 int TimeSeries::getRowSize() const{
     return data.size();
 }
@@ -100,4 +101,10 @@ string TimeSeries::getColName(int i) const {
         std::cout << "Can't access index" << endl;
     }
 }
+
+int TimeSeries::get_col_by_name(std::string name)
+{
+    return get_col_by_name(name);
+}
+
 

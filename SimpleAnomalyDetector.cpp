@@ -45,8 +45,14 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
 }
 
 vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
-    // TODO Auto-generated destructor stub
+    vector<AnomalyReport> v_anom;
+    vector<float> col1;
+    vector<float> col2;
+    for(correlatedFeatures a:cf){
+
+    }
 }
+
 
 float SimpleAnomalyDetector::find_threshold(Point **points, Line l, int len) {
     float max = 0;
