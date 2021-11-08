@@ -132,24 +132,7 @@ Line linear_reg(Point **points, int size)
     return l;
 }
 
-/**
- * Create a vector of points from 2 correlated features
- * @param cf
- * @return
- */
-std::vector<Point *> points_from_correlatedFeatures(std::vector<float> a, std::vector<float> b)
-{
 
-    std::vector<Point *> empty_vector;
-    int len = a.size();
-    for (int i = 0; i < len; i++)
-    {
-        Point *temp_point_p = new Point(a[ i ], b[ i ]);
-        empty_vector.emplace_back((temp_point_p));
-        //delete temp_point_p;
-    }
-    return empty_vector;
-}
 
 /**
  * returns the deviation between point p and the line

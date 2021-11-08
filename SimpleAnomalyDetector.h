@@ -33,6 +33,7 @@ public:
 	vector<correlatedFeatures> getNormalModel(){
 		return this->cf;
 	}
+    std::vector<Point *> points_from_correlatedFeatures(std::vector<float> a, std::vector<float> b);
 
 };
 

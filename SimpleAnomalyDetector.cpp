@@ -91,3 +91,15 @@ void SimpleAnomalyDetector::init_feature(correlatedFeatures &cf, string col1, st
         delete points_arr[i];
 }
 
+std::vector<Point *> SimpleAnomalyDetector::points_from_correlatedFeatures(std::vector<float> a, std::vector<float> b) {
+    std::vector<Point *> empty_vector;
+    int len = a.size();
+    for (int i = 0; i < len; i++)
+    {
+        Point *temp_point_p = new Point(a[ i ], b[ i ]);
+        empty_vector.emplace_back((temp_point_p));
+        //delete temp_point_p;
+    }
+    return empty_vector;
+}
+
