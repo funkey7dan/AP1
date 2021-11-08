@@ -24,7 +24,7 @@ private:
 
 public:
     explicit TimeSeries(const char *CSVfileName);
-    vector<float> get_col_by_name(std::string name);
+    vector<float> get_col_by_name(std::string name) const;
     const char *getFileName() const;
 
     vector<pair<std::string, std::vector<float>>> getDataBase() const;

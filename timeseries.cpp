@@ -57,11 +57,10 @@ void TimeSeries::constructDataBase()
 
         // Create a stringstream from line
         std::stringstream ss(line);
-
+        int i = 0;
         // Extract each column name
         while (std::getline(ss, colname, ','))
         {
-            int i = 0;
             // Initialize and add <colname, int vector> pairs to data
             this->data.push_back({colname, std::vector<float>{}});
             this->col_name_to_index.insert(pair<string, int>(colname, i));
@@ -124,10 +123,10 @@ string TimeSeries::getColName(int i) const
     }
 }
 
-vector<float> TimeSeries::get_col_by_name(std::string name)
+vector<float> TimeSeries::get_col_by_name(std::string name) const
 {
 
-    int index = this->col_name_to_index[ name ];
+    int index = this->col_name_to_index.at(name);
     return this->data[ index ].second;
 }
 

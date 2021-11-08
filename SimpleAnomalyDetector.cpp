@@ -1,5 +1,7 @@
 
 #include <tuple>
+#include <iostream>
+#include <ostream>
 #include "SimpleAnomalyDetector.h"
 #include "anomaly_detection_util.h"
 
@@ -47,16 +49,20 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
 vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
     vector<AnomalyReport> v_anom;
     for(correlatedFeatures a : cf){
-        vector<float> col1 = get_col_by_name(a.feature1);
-        vector<float> col2 = get_col_by_name(a.feature2);
+        vector<float> col1 = ts.get_col_by_name(a.feature1);
+        vector<float> col2 = ts.get_col_by_name(a.feature2);
         int len = col1.size();
         for(int i = 0; i < len; i++){
             Point p = Point(col1[i], col2[i]);
-            if (dev(p, a.lin_reg) > a.threshold){
-                AnomalyReport ar = AnomalyReport(a.feature1 + "-" + a.feature2, i);
+            float devf = dev(p, a.lin_reg);
+            float threshold = a.threshold;
+            if (devf > threshold){
+                AnomalyReport ar = AnomalyReport(a.feature1 + "-" + a.feature2, i + 1);
+                v_anom.push_back(ar);
             }
         }
     }
+    return v_anom;
 }
 
 float SimpleAnomalyDetector::find_threshold(Point **points, Line l, int len) {
