@@ -104,7 +104,7 @@ string TimeSeries::getColName(int i) const {
 
 int TimeSeries::get_col_by_name(std::string name)
 {
-    return get_col_by_name(name);
+    return this->col_name_to_index[name];
 }
 
 
