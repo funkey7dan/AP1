@@ -172,3 +172,4 @@ float dev(Point p, Point **points, int size)
 
 
 
+

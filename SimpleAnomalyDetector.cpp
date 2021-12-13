@@ -7,6 +7,7 @@
 SimpleAnomalyDetector::SimpleAnomalyDetector() {
     threshold = 0.9;
 }
+
 // destructor
 SimpleAnomalyDetector::~SimpleAnomalyDetector() = default;
 
@@ -58,7 +59,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
 }
 /**
  * a function to detect anomalies in a timeseries object.
- * We iterate through the features we found correkative and saved in cf, and for each pair of features we check the
+ * We iterate through the features we found correlative and saved in cf, and for each pair of features we check the
  * provided timeseries line by line. If any of the features we found to be have a high deviation from the line
  * we found in the normal data, we create a new anomaly report object.
  * @param ts the time series we check for anomalies.
@@ -69,27 +70,46 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
     /*
      * iterate through the correlative pairs we found
      */
-    for(correlatedFeatures const& a : cf){
-        vector<float> col1 = ts.get_col_by_name(a.feature1);
-        vector<float> col2 = ts.get_col_by_name(a.feature2);
+    for(correlatedFeatures const& feature : cf){
+        vector<float> col1 = ts.get_col_by_name(feature.feature1);
+        vector<float> col2 = ts.get_col_by_name(feature.feature2);
         int len = col1.size();
         /*
          * iterate through the row and create points from the values
          */
         for(int i = 0; i < len; i++){
+            // the point we are checking
             Point p = Point(col1[i], col2[i]);
             // calculate the deviation of the point from the normal line
-            float devf = dev(p, a.lin_reg);
-            float threshold_margin = a.threshold;
+
             // check if the deviation is withing accepted margins. If not, report anomaly.
-            if (devf > threshold_margin){
-                AnomalyReport ar = AnomalyReport(a.feature1 + "-" + a.feature2, i + 1);
+            if (is_anomalous(p, feature)){
+                AnomalyReport ar = AnomalyReport(feature.feature1 + "-" + feature.feature2, i + 1);
                 v_anom.push_back(ar);
             }
         }
     }
     return v_anom;
 }
+
+/**
+ *
+ * @param p the point we preform the anomaly check for
+ * @param feature the feature in relation to we preform the check
+ * @return whether the deviation of the point is within normal range of values for this feature
+ */
+bool SimpleAnomalyDetector::is_anomalous(Point p, correlatedFeatures feature){
+
+    if(feature.circ_reg.radius == -1){
+        float devf = dev(p, feature.lin_reg);
+        float threshold_margin = feature.threshold;
+        return devf > threshold_margin;
+    }
+    else
+        // Check if the distance of the given point from the center of the circle is greater than adjusted radius
+        return dist(feature.circ_reg.center, p) >= feature.circ_reg.radius*1.1;
+}
+
 
 /**
  * A function to calculate the normal threshold.
