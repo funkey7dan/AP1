@@ -39,10 +39,10 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
                 max_correlation = pearson_value;
                 correlating_index = j;
             }
-            // if the max correlation we found is less than the threshold we defined, this index should be ignored
-            if (max_correlation < this->threshold) {
-                correlating_index = -1;
-            }
+//            // if the max correlation we found is less than the threshold we defined, this index should be ignored
+//            if (max_correlation < this->threshold) {
+//                correlating_index = -1;
+//            }
         }
         // if the index is -1 it means no meaningful correlation was found
         if (correlating_index == -1) {
@@ -53,7 +53,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
         init_feature(cf_temp, ts.getColName(i), ts.getColName(correlating_index),
                      dataBase[i].second, dataBase[correlating_index].second, max_correlation);
         // insert the correlation features we found into the correlation features vector
-        this->cf.push_back(cf_temp);
+        //this->cf.push_back(cf_temp);
     }
 }
 /**
@@ -120,18 +120,21 @@ float SimpleAnomalyDetector::find_threshold(Point **points, Line l, int len) {
  */
 void SimpleAnomalyDetector::init_feature(correlatedFeatures &cf, string col1, string col2,
                                          vector<float> &v1, vector<float> &v2, float mc) {
-    cf.feature1 = std::move(col1);
-    cf.feature2 = std::move(col2);
-    cf.corrlation = mc;
-    // create a vector of points from 2 vectors of values (generate all the points)
-    std::vector<Point *> points_arr = points_from_correlatedFeatures(v1, v2);
-    Point **points;
-    points = points_arr.data();
-    cf.lin_reg = linear_reg(points, points_arr.size());
-    cf.threshold = find_threshold(points, cf.lin_reg, points_arr.size()) * 1.1;
-    // free all the data
-    for(auto & i : points_arr)
-        delete i;
+    if (mc > this->threshold){
+        cf.feature1 = std::move(col1);
+        cf.feature2 = std::move(col2);
+        cf.corrlation = mc;
+        // create a vector of points from 2 vectors of values (generate all the points)
+        std::vector<Point *> points_arr = points_from_correlatedFeatures(v1, v2);
+        Point **points;
+        points = points_arr.data();
+        cf.lin_reg = linear_reg(points, points_arr.size());
+        cf.threshold = find_threshold(points, cf.lin_reg, points_arr.size()) * 1.1;
+        // free all the data
+        for(auto & i : points_arr)
+            delete i;
+        this->cf.push_back(cf);
+    }
 }
 
 /**
@@ -153,4 +156,3 @@ std::vector<Point *> SimpleAnomalyDetector::points_from_correlatedFeatures(std::
     }
     return empty_vector;
 }
-
