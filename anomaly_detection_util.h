@@ -15,12 +15,12 @@ float cov(float* x,  float* y, int size);
 // returns the Pearson correlation coefficient of X and Y
 float pearson(float* x, float* y, int size);
 
-class Line{
+class Line {
 public:
     float a,b;
     Line():a(0),b(0){}
     Line(float a, float b):a(a),b(b){}
-    float f(float x) const{
+    float f(float x) const {
         return a*x+b;
     }
 };

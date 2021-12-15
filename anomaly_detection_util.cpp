@@ -12,17 +12,11 @@
  * @param size - size of the sample
  * @return the avg of the range
  */
-float avg(const float *x, int size)
-{
-
+float avg(const float *x, int size) {
     float sum = 0; // sum of the elements in the X array
-//    if (size <= 0) {
-//        throw std::runtime_error("Division by zero!\n");
-//    }
     // sums all the elements in the array
-    for (int i = 0; i < size; ++i)
-    {
-        sum += x[ i ];
+    for (int i = 0; i < size; ++i) {
+        sum += x[i];
     }
     // return the avg
     return sum / size;
@@ -34,19 +28,11 @@ float avg(const float *x, int size)
  * @param size size of the array
  * @return variance
  */
-float var(float *x, int size)
-{
-//    if (size <= 0) {
-//        throw std::runtime_error("Division by zero!\n");
-//    }
-//    if (x == nullptr) {
-//        throw "Array is a null ponter!";
-//    }
+float var(float *x, int size) {
     float mu = avg(x, size);
     float sum = 0;
-    for (int i = 0; i < size; ++i)
-    {
-        sum += x[ i ] * x[ i ];
+    for (int i = 0; i < size; ++i) {
+        sum += x[i] * x[i];
     }
     return sum / size - mu * mu;
 }
@@ -58,21 +44,13 @@ float var(float *x, int size)
  * @param size size of arrays.
  * @return covariance between x and y.
  */
-float cov(float *x, float *y, int size)
-{
+float cov(float *x, float *y, int size) {
     //xm and ym are the avgs of two given arrays.
-//    if (size <= 0) {
-//        throw std::runtime_error("Division by zero!\n");
-//    }
-//    if (x == nullptr || y == nullptr) {
-//        throw "Array is a null ponter!";
-//    }
     float xm = avg(x, size);
     float ym = avg(y, size);
     float sum = 0;
-    for (int i = 0; i < size; ++i)
-    {
-        sum += x[ i ] * y[ i ];
+    for (int i = 0; i < size; ++i) {
+        sum += x[i] * y[i];
     }
     return sum / size - xm * ym;
 }
@@ -84,14 +62,7 @@ float cov(float *x, float *y, int size)
  * @param size of x and y.
  * @return Pearson correlation coefficient.
  */
-float pearson(float *x, float *y, int size)
-{
-//    if (size <= 0) {
-//        throw std::runtime_error("Division by zero!\n");
-//    }
-//    if (x == nullptr || y == nullptr) {
-//        throw "Array is a null pointer!";
-//    }
+float pearson(float *x, float *y, int size) {
     //calculate the covariance
     float cov_xy = cov(x, y, size);
     //define the standard deviation of x and y
@@ -106,20 +77,12 @@ float pearson(float *x, float *y, int size)
  * @param size of array of points
  * @return a line that represents the linear regression
  */
-Line linear_reg(Point **points, int size)
-{
-//    if (size <= 0) {
-//        throw std::runtime_error("Division by zero!\n");
-//    }
-//    if (points == nullptr) {
-//        throw "Array is a null pointer!";
-//    }
+Line linear_reg(Point **points, int size) {
     float x_array[size], y_array[size], avg_x, avg_y, a, b;
     // create arrays of the x and y values
-    for (int i = 0; i < size; i++)
-    {
-        x_array[ i ] = points[ i ]->x;
-        y_array[ i ] = points[ i ]->y;
+    for (int i = 0; i < size; i++) {
+        x_array[i] = points[i]->x;
+        y_array[i] = points[i]->y;
     }
     a = (cov(x_array, y_array, size)) / var(x_array, size);
     avg_x = avg(x_array, size);
@@ -129,22 +92,17 @@ Line linear_reg(Point **points, int size)
     return l;
 }
 
-
-
 /**
  * returns the deviation between point p and the line
  * @param p single point
  * @param l single line
  * @return deviation between point Y and the expected location
  */
-float dev(Point p, Line l)
-{
-
+float dev(Point p, Line l) {
     float expected_y = l.f(p.x);
     float res = expected_y - p.y;
     //abs value
-    if(res < 0)
-    {
+    if(res < 0) {
         res *= -1;
     }
     return res;
@@ -157,14 +115,7 @@ float dev(Point p, Line l)
  * @param size of array of points
  * @return deviation between point p and the line equation
  */
-float dev(Point p, Point **points, int size)
-{
-//    if (points == nullptr) {
-//        throw "Array is a null pointer!";
-//    }
-//    if (size <= 0) {
-//        throw std::runtime_error("Division by zero!\n");
-//    }
+float dev(Point p, Point **points, int size) {
     Line line = linear_reg(points, size);
     return dev(p, line);
 }

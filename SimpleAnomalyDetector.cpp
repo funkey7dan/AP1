@@ -40,10 +40,6 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
                 max_correlation = pearson_value;
                 correlating_index = j;
             }
-//            // if the max correlation we found is less than the threshold we defined, this index should be ignored
-//            if (max_correlation < this->threshold) {
-//                correlating_index = -1;
-//            }
         }
         // if the index is -1 it means no meaningful correlation was found
         if (correlating_index == -1) {
@@ -53,8 +49,6 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries &ts) {
         // function to initialize the features
         init_feature(cf_temp, ts.getColName(i), ts.getColName(correlating_index),
                      dataBase[i].second, dataBase[correlating_index].second, max_correlation);
-        // insert the correlation features we found into the correlation features vector
-        //this->cf.push_back(cf_temp);
     }
 }
 /**
@@ -93,13 +87,13 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries &ts) {
 }
 
 /**
- *
+ * determine wether p deviate against cf
  * @param p the point we preform the anomaly check for
  * @param feature the feature in relation to we preform the check
  * @return whether the deviation of the point is within normal range of values for this feature
  */
 bool SimpleAnomalyDetector::is_anomalous(Point p, correlatedFeatures feature){
-
+    // examine if we need to take care of circle or line situation
     if(feature.circ_reg.radius == -1){
         float devf = dev(p, feature.lin_reg);
         float threshold_margin = feature.threshold;

@@ -1,12 +1,26 @@
 
 #include "HybridAnomalyDetector.h"
-
+/*
+ * this class inherits SimpleAnomalyDetector.
+ * we use it when threshold in learnNormal is between 0.9 and 0.5.
+ */
 HybridAnomalyDetector::HybridAnomalyDetector() {
 }
-
+/**
+ * destructor
+ */
 HybridAnomalyDetector::~HybridAnomalyDetector() {
 }
 
+/**
+ * Helper function to initialize all the fields of a correlatedFeatures object.
+ * @param cf vector of correlated features
+ * @param col1 Name of the first column of the data table
+ * @param col2 Name of the second column of the data table
+ * @param v1 vector of the values of the first column
+ * @param v2 vector of the values of the second column
+ * @param mc the maximal correlation
+ */
 void HybridAnomalyDetector::init_feature(correlatedFeatures &cf, string col1, string col2, vector<float> &v1,
                                          vector<float> &v2, float mc) {
     SimpleAnomalyDetector::init_feature(cf, col1, col2, v1, v2, mc);
@@ -26,5 +40,4 @@ void HybridAnomalyDetector::init_feature(correlatedFeatures &cf, string col1, st
             delete i;
         this->cf.push_back(cf);
     }
-
 }
