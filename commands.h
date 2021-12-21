@@ -21,6 +21,7 @@ public:
 	virtual ~DefaultIO(){}
 
 	// you may add additional methods here
+    // add function to read/write to file?
 };
 
 // you may add here helper classes
