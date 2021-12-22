@@ -22,6 +22,13 @@ public:
 
 	// you may add additional methods here
     // add function to read/write to file?
+    virtual void readFile(string fileName){
+        std::ofstream outfile(fileName);
+        string line = "";
+        while((line = read()) != "done")
+            outfile << line << endl;
+        outfile.close();
+    }
 };
 
 // you may add here helper classes
