@@ -1,6 +1,9 @@
 #include "CLI.h"
 
-
+/**
+ * construcor.
+ * @param dio is DefaultIO tool (standard or network based (sockets).
+ */
 CLI::CLI(DefaultIO* dio) {
     this->dio = dio;
     this->commands.push_back(new UploadCSV(dio));
@@ -11,6 +14,9 @@ CLI::CLI(DefaultIO* dio) {
     this->commands.push_back(new Exit(dio));
 }
 
+/**
+ * main program's fuction - display server's menu and activates each command.
+ */
 void CLI::start(){
     MutualInfo mutualInfo;
     int size = this->commands.size();
@@ -35,6 +41,9 @@ void CLI::start(){
 
 }
 
+/**
+ * destructor - delete each element in commands vecor we created in constructor.
+ */
 CLI::~CLI() {
     int size = this->commands.size();
     for (int i = 0; i < size; ++i) {
