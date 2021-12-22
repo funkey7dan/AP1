@@ -38,7 +38,6 @@ void CLI::start(){
             this->commands[choiceNum]->execute(&mutualInfo);
         }
     }
-
 }
 
 /**
