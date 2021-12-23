@@ -27,8 +27,8 @@ void CLI::start(){
         this->dio->write("Welcome to the Anomaly Detection Server.\nPlease choose an option:\n");
         for (int i = 0; i < size; ++i){
             // first, write option number
-            this->dio->write((char)(i + 1 + '0'));
-            this->dio->write(". ");
+            this->dio->write((char)(i + 1));
+            this->dio->write(".");
             this->dio->write(this->commands[i]->getDescription() + "\n");
         }
         string choice = dio->read();
