@@ -32,11 +32,12 @@ public:
 };
 
 // you may add here helper classes
-struct MutualInfo{
-    float threshold;
+struct MutualInfo {
+    float threshold = 0.9;
     vector<AnomalyReport> ar;
+    vector<comboReport> crVector;
+    int numOfRows;
 };
-
 
 /**
  * standard input output class inherits from DefaultIO

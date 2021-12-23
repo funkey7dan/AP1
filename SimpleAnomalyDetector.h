@@ -36,6 +36,9 @@ public:
 	vector<correlatedFeatures> getNormalModel(){
 		return this->cf;
 	}
+    void setThreshold(float f){
+        this->threshold = f;
+    }
     static std::vector<Point *> points_from_correlatedFeatures(std::vector<float> a, std::vector<float> b);
 
     virtual bool is_anomalous(Point p, correlatedFeatures features);
