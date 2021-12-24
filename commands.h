@@ -232,6 +232,7 @@ public:
             num2 = stol(result[ 1 ]);
             for (auto &cr: pInfo->crVector)
             {
+                // @ TODO check additional cases we missed
                 if((cr.start <= num1 && cr.end >= num1 && cr.end <= num2)
                    || (cr.start >= num1 && cr.end <= num2)
                    || (cr.end >= num2 && cr.start >= num1 && cr.start <= num2)
