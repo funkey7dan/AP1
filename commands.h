@@ -125,14 +125,14 @@ public:
 
         float thrshld;
         bool isCorrect = false;
-        dio->write("The current correlation threshold is ");
-        dio->write(pInfo->threshold);
-        dio->write("\n");
-        dio->write("Type a new threshold\n");
         do
         {
+            dio->write("The current correlation threshold is ");
+            dio->write(pInfo->threshold);
+            dio->write("\n");
+            dio->write("Type a new threshold\n");
             dio->read(&thrshld);
-            if(thrshld < 0 || thrshld > 1)
+            if(thrshld <= 0 || thrshld > 1)
             {
                 dio->write("please choose a value between 0 and 1.\n");
             }
@@ -195,7 +195,7 @@ public:
         for (auto &report: pInfo->ar)
         {
             dio->write(report.timeStep);
-            dio->write("\t");
+            dio->write("\t ");
             dio->write(report.description);
             dio->write("\n");
         }
@@ -211,7 +211,10 @@ public:
 
     void execute(MutualInfo *pInfo) override
     {
-
+        // initiate to "false" to avoid errors in further calls to this commands
+        for (auto &cr: pInfo->crVector) {
+            cr.isFP = false;
+        }
         string line = "";
         long num1 = 0, num2 = 0;
         float tpCount = 0, fpCount = 0, P = 0, N = pInfo->numOfRows;
@@ -230,35 +233,21 @@ public:
             }
             num1 = stol(result[ 0 ]);
             num2 = stol(result[ 1 ]);
-            for (auto &cr: pInfo->crVector)
-            {
-                // @ TODO check additional cases we missed
-                if((cr.start <= num1 && cr.end >= num1 && cr.end <= num2)
-                   || (cr.start >= num1 && cr.end <= num2)
-                   || (cr.end >= num2 && cr.start >= num1 && cr.start <= num2)
-                   || (cr.end > num2 && cr.start < num1))
-
-                {
+            for (auto &cr: pInfo->crVector) {
+                if(num2 >= cr.start && num1 <= cr.end) {
                     cr.isFP = true;
+                    tpCount++;
+                    break;
                 }
             }
-
             // increment the counter for positives
             P++;
             // substract the rows that are passed to us from total rows of timeseries.
             N -= (num2 - num1 + 1);
         }
         for (auto &cr: pInfo->crVector)
-        {
-            if(cr.isFP)
-            {
-                tpCount++;
-            }
-            else
-            {
+            if(!cr.isFP)
                 fpCount++;
-            }
-        }
         dio->write("Upload complete.\n");
         dio->write("True Positive Rate: ");
         dio->write((int) (1000.0 * tpCount / P) / 1000.0f);
