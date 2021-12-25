@@ -1,4 +1,3 @@
-
 #ifndef COMMANDS_H_
 #define COMMANDS_H_
 #include<iostream>
@@ -7,7 +6,12 @@
 #include <fstream>
 #include <vector>
 #include "HybridAnomalyDetector.h"
+
 using namespace std;
+
+/**
+ * abstract class that allows us to communicate with the user.
+ */
 class DefaultIO {
 public:
     virtual string read() = 0;
@@ -32,20 +36,27 @@ public:
         outfile.close();
     }
 };
-// a struct to represent the union of reports into a time period.
+
+/**
+ * a struct to represent the union of reports into a time period.
+ */
 struct comboReport {
     long start;
     long end;
     string description;
     bool isFP = false;
 };
-// you may add here helper classes
+
+/**
+ * a struct that allows us to share information between commands.
+ */
 struct MutualInfo {
     float threshold = 0.9;
     vector<AnomalyReport> ar;
     vector<comboReport> crVector;
     int numOfRows;
 };
+
 /**
  * standard input output class inherits from DefaultIO
  */
@@ -76,7 +87,10 @@ class StandardIO : public DefaultIO {
         cin >> *f;
     }
 };
-// you may edit this class
+
+/**
+ * command abtract class
+ */
 class Command {
 protected:
     DefaultIO *dio;
@@ -96,7 +110,7 @@ public:
     virtual ~Command()
     {}
 };
-// implement here your command classes
+
 class UploadCSV : public Command {
 public:
     // initialize base class, this method called "Member Initializer List in C++".
