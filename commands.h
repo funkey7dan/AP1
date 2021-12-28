@@ -88,6 +88,9 @@ class StandardIO : public DefaultIO {
     }
 };
 
+//TODO: discuss if we need to implement SocketIO class...
+
+
 /**
  * command abtract class
  */
