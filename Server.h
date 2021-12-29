@@ -13,11 +13,10 @@
 #include "commands.h"
 
 using namespace std;
-
 // edit your ClientHandler interface here:
-class ClientHandler{
-    public:
-    virtual void handle(int clientID)=0;
+class ClientHandler {
+public:
+    virtual void handle(int clientID) = 0;
 };
 
 
