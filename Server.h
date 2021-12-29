@@ -8,8 +8,9 @@
 #ifndef SERVER_H_
 #define SERVER_H_
 
-
+#include <sys/socket.h>
 #include <thread>
+#include "commands.h"
 
 using namespace std;
 
@@ -21,7 +22,38 @@ class ClientHandler{
 
 
 // you can add helper classes here and implement on the cpp file
+/**
+ * socket io class
+ */
+class SocketIO : public DefaultIO {
+    int sockNum;
+    SocketIO(int sock):sockNum(sock){}
+    string read() override {
+        string retString = "";
+        char c = '0';
+        // read char by char
+        // TODO: think of better way to do this - too much sys calls.
+        recv(this->sockNum, &c, 1 /* char size*/, 0);
+        while (c != '\n') {
+            retString += c;
+            recv(this->sockNum, &c, 1 /* char size*/, 0);
+        }
+        return retString;
+    }
 
+    void write(string text) override {
+        char const *c = text.c_str(); // to bytes
+        send(this->sockNum, c, text.size(), 0);
+    }
+
+    void write(float f) override {
+        send(this->sockNum, &f, sizeof(float), 0);
+    }
+
+    void read(float *f) override {
+        recv(this->sockNum, f, sizeof(float), 0);
+    }
+};
 
 // edit your AnomalyDetectionHandler class here
 class AnomalyDetectionHandler:public ClientHandler{
