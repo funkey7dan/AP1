@@ -11,6 +11,7 @@
 #include <sys/socket.h>
 #include <thread>
 #include "commands.h"
+#include "CLI.h"
 
 using namespace std;
 // edit your ClientHandler interface here:
@@ -25,6 +26,7 @@ public:
  * socket io class
  */
 class SocketIO : public DefaultIO {
+public:
     int sockNum;
     SocketIO(int sock):sockNum(sock){}
     string read() override {
@@ -58,7 +60,9 @@ class SocketIO : public DefaultIO {
 class AnomalyDetectionHandler:public ClientHandler{
 	public:
     virtual void handle(int clientID){
-
+        SocketIO dio(clientID);
+        CLI cli(&dio);
+        cli.start();
     }
 };
 
