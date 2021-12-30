@@ -17,6 +17,7 @@
 #include "CLI.h"
 
 using namespace std;
+
 // edit your ClientHandler interface here:
 class ClientHandler {
 public:
@@ -31,7 +32,9 @@ public:
 class SocketIO : public DefaultIO {
 public:
     int sockNum;
-    SocketIO(int sock):sockNum(sock){}
+
+    SocketIO(int sock) : sockNum(sock) {}
+
     string read() override {
         string retString = "";
         char c = '0';
@@ -51,7 +54,10 @@ public:
     }
 
     void write(float f) override {
-        send(this->sockNum, &f, sizeof(float), 0);
+        std::ostringstream stream;
+        stream << f;
+        string f_string(stream.str());
+        send(this->sockNum, f_string.c_str(), f_string.size(), 0);
     }
 
     void read(float *f) override {
@@ -62,9 +68,9 @@ public:
 };
 
 // edit your AnomalyDetectionHandler class here
-class AnomalyDetectionHandler:public ClientHandler{
-	public:
-    virtual void handle(int clientID){
+class AnomalyDetectionHandler : public ClientHandler {
+public:
+    virtual void handle(int clientID) {
         SocketIO dio(clientID);
         CLI cli(&dio);
         cli.start();
@@ -74,16 +80,23 @@ class AnomalyDetectionHandler:public ClientHandler{
 
 // implement on Server.cpp
 class Server {
-	thread* t; // the thread to run the start() method in
+    thread *t; // the thread to run the start() method in
     int clientLimit;
+    int fd;
+    struct sockaddr_in server;
+    struct sockaddr_in client;
 
-	// you may add data members
 
 public:
-	Server(int port) throw (const char*);
-	virtual ~Server();
-	void start(ClientHandler& ch)throw(const char*);
-	void stop();
+    Server(int port) throw(const char *);
+
+    virtual ~Server();
+
+    void start(ClientHandler &ch) throw(const char *);
+
+    void stop();
+
+    bool stopFlag;
 };
 
 #endif /* SERVER_H_ */
