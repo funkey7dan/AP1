@@ -8,8 +8,11 @@
 #ifndef SERVER_H_
 #define SERVER_H_
 
+#include <unistd.h>
 #include <sys/socket.h>
+#include <pthread.h>
 #include <thread>
+#include <netinet/in.h>
 #include "commands.h"
 #include "CLI.h"
 
@@ -52,7 +55,9 @@ public:
     }
 
     void read(float *f) override {
-        recv(this->sockNum, f, sizeof(float), 0);
+        char buffer[1024];
+        int bytes_received = recv(this->sockNum, buffer, 100, 0);
+        *f = atof(buffer);
     }
 };
 
