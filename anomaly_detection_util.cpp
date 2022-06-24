@@ -1,7 +1,7 @@
 /*
  * anomaly_detection_util.cpp
  *
- * Authors: ***REMOVED*** Daniel Bronfman & 316163922 Tomer Pardilov
+ * Authors:  Daniel Bronfman &  Tomer Pardilov
  */
 #include <cmath>
 #include "anomaly_detection_util.h"
